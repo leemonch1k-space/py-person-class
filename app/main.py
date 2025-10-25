@@ -8,15 +8,16 @@ class Person:
 
 
 def create_person_list(people: list) -> list:
+    Person.people.clear()
     for person in people:
         if person.get("name") not in Person.people:
             Person(person.get("name"), person.get("age"))
 
     for person in people:
-        method_person = Person.people[person["name"]]
+        person_instance = Person.people[person.get("name")]
         if person.get("husband") is not None:
-            method_person.husband = Person.people[person["husband"]]
+            person_instance.husband = Person.people[person.get("husband")]
         if person.get("wife") is not None:
-            method_person.wife = Person.people[person["wife"]]
+            person_instance.wife = Person.people[person.get("wife")]
 
-    return [Person.people[person["name"]] for person in people]
+    return [Person.people[person.get("name")] for person in people]
